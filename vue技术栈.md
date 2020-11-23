@@ -10,7 +10,7 @@
 
 封装了一个`<a>`标签，点击可进行路由的跳转
 
-具有专用属性`to`，可指定要跳转的路径，如`<router-link to='/path'>`或指定跳转的对象，此时需要使用v-bind进行绑定，如`<router-link v-bind:to='{name：'pathname'}'>`
+具有专用属性`to`，可指定要跳转的路径，如`<router-link to='/path'>`或指定跳转的对象，此时需要使用v-bind进行绑定，如`<router-link v-bind:to='{name："pathname"}'>`
 
 **若中间包裹内容，需要闭合标签，不能使用开标签，如：`</router-link>`**
 
