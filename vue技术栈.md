@@ -478,13 +478,13 @@ URL `/about?food=banana` 会将 `{query: 'banana'}` 作为属性传递给 `About
 
 vue-router默认使用hash模式，使用URL的hash来模拟一个完整的URL。hash即地址栏URL中的`#`（锚点）,表示网页中的一个位置，改变`#`后的部分不会重新加载页面，即hash不会被包括在http请求中，对后端没有影响。每次hash值的改变都会在浏览器的访问记录中增加一条记录，所以hash模式通过锚点的值的改变，根据不同的值，在DOM处渲染不同的数据。
 
-但是，在URL中包含`#`并不美观，使用History模式即可实现在修改URL的同时不向后端发送请求，这种模式充分利用了html5 history interface中新增的pushState()和replaceState()方法。除此之外，History模式还包含以下优点：
+但是，在URL中包含`#`并不美观，使用History模式即可实现在修改URL的同时不向后端发送请求，这种模式充分利用了html5 history interface中新增的`pushState()`和`replaceState()`方法。除此之外，History模式还包含以下优点：
 
-1. pushState()设置的新URL可以是与当前URL同源的URL，而hash只可修改`#`后的值，设置的URL只能是与当前同文档的URL。
-2. pushState()设置的新URL可以与当前URL相同，这样也会把记录添加到栈中，而hash设置的 URL必须与原URL不同才会触发动作将记录添加到栈中。
+1. `pushState()`设置的新URL可以是与当前URL同源的URL，而hash只可修改`#`后的值，设置的URL只能是与当前同文档的URL。
+2. `pushState()`设置的新URL可以与当前URL相同，这样也会把记录添加到栈中，而hash设置的 URL必须与原URL不同才会触发动作将记录添加到栈中。
 
-3. pushState()通过stateObject参数可以添加任意类型的数据到记录中，而hash只可以添加短字符串。
-4. pushState()可额外设置title属性宫后续使用。
+3. `pushState()`通过`stateObject`参数可以添加任意类型的数据到记录中，而hash只可以添加短字符串。
+4. `pushState()`可额外设置`title`属性供后续使用。
 
 当然History模式也并不是完全优于hash模式。在用户手动输入URL后回车时，或是浏览器刷新时，hash模式下仅`#`符号之前的内容会被包含到请求中，对于后端来说，即使没有做到路由全覆盖，也不会出现404错误。而History模式下前端URL必须和向后端发送请求的URL完全一致，如果后端缺少对路由的覆盖处理，就会返回404错误。因此要使用History模式需要对后端进行配置。
 
