@@ -1,4 +1,4 @@
-#  						  vue技术栈:vue-router
+#  						  **vue-router**
 
 ------
 
@@ -501,7 +501,93 @@ mode:'History'
 
 ## 5）过渡效果
 
+# **vueX**
 
+----
+
+## （一）状态管理Bus
+
+一般在项目中，状态管理都是使用Vue官方提供的Vuex
+
+当在多组件之间共享状态变得复杂时，使用Vuex，此外也可以使用Bus来进行简单的状态管理
+
+### 1）父子组件通信
+
+---
+
+例子：v-model双向绑定的实现
+
+子组件 :
+
+```javascript
+<template>
+    <input @input="changeData" :value='value'>
+</template>
+<script>
+export default {
+    name:'Ainput',
+    props:{
+        value: {
+           type: [String,Number],
+           default: '',
+        }
+    },
+    methods:{
+        changeData(event){
+            const value = event.target.value
+            this.$emit('input',value)
+        }
+    }
+}
+</script>
+```
+
+父组件：
+
+```js
+<template>
+  <div>
+    <Ainput @input="handleInput" :value="inputValue"/> //等效于 v-model=‘inputValue’
+    <p>{{ inputValue }}</p>
+  </div>
+</template>
+<script>
+import Ainput from "@/components/Ainput.vue";
+
+export default {
+  name: "store",
+  data() {
+    return {
+      inputValue: "aaaaa"
+    };
+  },
+  components: {
+    Ainput
+  },
+  methods: {
+    handleInput(val) {
+      this.inputValue = val;
+    }
+  }
+};
+</script>
+```
+
+
+
+过程：
+
+子组件向父组件发送数据，通过`$emit`触发`input`事件，来调用父组件中的方法，修改父组件中的值。
+
+这里子组件将value的值以参数的形式，通过事件提交给父组件。
+
+父组件接收后，通过`input`的事件监听器调用`handleInput`方法，修改`value`属性的值。
+
+父子组件通信完成。
+
+### 2）兄弟组件通信
+
+---
 
 
 
